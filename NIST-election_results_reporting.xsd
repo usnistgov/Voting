@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="NIST-election_results_reporting.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="NIST-election_results_reporting.xsd" elementFormDefault="qualified" version="1.0">
+	<!-- This schema prepared by the National Institute of Standards and Technology, V43, June 22, 2015 -->
+	<!-- ========== Imports ========== -->
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
+	<!-- ========== Roots ========== -->
+	<xsd:element name="ElectionReport" type="ElectionReport"/>
+	<!-- ========== Primitives ========== -->
+	<xsd:simpleType name="HtmlColorString">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9a-f]{6}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TimeWithZone">
+		<xsd:restriction base="xsd:time">
+			<xsd:pattern value="(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]|(24:00:00))(Z|[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ========== Enumerations ========== -->
+	<xsd:simpleType name="BallotMeasureType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BallotMeasure"/>
+			<xsd:enumeration value="Initiative"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Referendum"/>
+			<xsd:enumeration value="Retention"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CandidatePostElectionStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AdvancedToRunoff"/>
+			<xsd:enumeration value="ProjectedWinner"/>
+			<xsd:enumeration value="Winner"/>
+			<xsd:enumeration value="Withdrawn"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CandidatePreElectionStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Filed"/>
+			<xsd:enumeration value="Qualified"/>
+			<xsd:enumeration value="Withdrawn"/>
+			<xsd:enumeration value="WriteIn"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CodeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Fips"/>
+			<xsd:enumeration value="LocalLevel"/>
+			<xsd:enumeration value="NationalLevel"/>
+			<xsd:enumeration value="OcdId"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="StateLevel"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CountItemStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Completed"/>
+			<xsd:enumeration value="InProcess"/>
+			<xsd:enumeration value="NotProcessed"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CountItemType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Absentee"/>
+			<xsd:enumeration value="AbsenteeFwab"/>
+			<xsd:enumeration value="AbsenteeInPerson"/>
+			<xsd:enumeration value="AbsenteeMail"/>
+			<xsd:enumeration value="Early"/>
+			<xsd:enumeration value="ElectionDay"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Provisional"/>
+			<xsd:enumeration value="Total"/>
+			<xsd:enumeration value="Uocava"/>
+			<xsd:enumeration value="WriteIn"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DayType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Sunday"/>
+			<xsd:enumeration value="Monday"/>
+			<xsd:enumeration value="Tuesday"/>
+			<xsd:enumeration value="Wednesday"/>
+			<xsd:enumeration value="Thursday"/>
+			<xsd:enumeration value="Friday"/>
+			<xsd:enumeration value="Saturday"/>
+			<xsd:enumeration value="Weekday"/>
+			<xsd:enumeration value="Weekend"/>
+			<xsd:enumeration value="All"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DeviceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Electronic"/>
+			<xsd:enumeration value="Lever"/>
+			<xsd:enumeration value="ManualCount"/>
+			<xsd:enumeration value="MixedSystems"/>
+			<xsd:enumeration value="OpscanCentral"/>
+			<xsd:enumeration value="OpscanPrecinct"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="PunchCard"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ElectionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="General"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="PartisanPrimaryClosed"/>
+			<xsd:enumeration value="PartisanPrimaryOpen"/>
+			<xsd:enumeration value="Primary"/>
+			<xsd:enumeration value="Runoff"/>
+			<xsd:enumeration value="Special"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="GeoSpatialFormat">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="GeoJson"/>
+			<xsd:enumeration value="Gml"/>
+			<xsd:enumeration value="Kml"/>
+			<xsd:enumeration value="Shp"/>
+			<xsd:enumeration value="Wkt"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OfficeTermType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FullTerm"/>
+			<xsd:enumeration value="UnexpiredTerm"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ReportDetailLevel">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PrecinctLevel"/>
+			<xsd:enumeration value="SummaryContest"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ReportingUnitType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BallotBatch"/>
+			<xsd:enumeration value="City"/>
+			<xsd:enumeration value="CityCouncil"/>
+			<xsd:enumeration value="CombinedPrecinct"/>
+			<xsd:enumeration value="Congressional"/>
+			<xsd:enumeration value="County"/>
+			<xsd:enumeration value="CountyCouncil"/>
+			<xsd:enumeration value="DropBox"/>
+			<xsd:enumeration value="Judicial"/>
+			<xsd:enumeration value="Municipality"/>
+			<xsd:enumeration value="National"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="PollingPlace"/>
+			<xsd:enumeration value="Precinct"/>
+			<xsd:enumeration value="School"/>
+			<xsd:enumeration value="Special"/>
+			<xsd:enumeration value="SplitPrecinct"/>
+			<xsd:enumeration value="State"/>
+			<xsd:enumeration value="StateHouse"/>
+			<xsd:enumeration value="StateSenate"/>
+			<xsd:enumeration value="Town"/>
+			<xsd:enumeration value="Township"/>
+			<xsd:enumeration value="Utility"/>
+			<xsd:enumeration value="Village"/>
+			<xsd:enumeration value="VoteCenter"/>
+			<xsd:enumeration value="Ward"/>
+			<xsd:enumeration value="Water"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ResultsStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Certified"/>
+			<xsd:enumeration value="Correction"/>
+			<xsd:enumeration value="PreElection"/>
+			<xsd:enumeration value="Recount"/>
+			<xsd:enumeration value="UnofficialComplete"/>
+			<xsd:enumeration value="UnofficialPartial"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="VoteVariationType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="1ofM"/>
+			<xsd:enumeration value="Approval"/>
+			<xsd:enumeration value="Borda"/>
+			<xsd:enumeration value="Cumulative"/>
+			<xsd:enumeration value="Majority"/>
+			<xsd:enumeration value="Measure"/>
+			<xsd:enumeration value="NofM"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Plurality"/>
+			<xsd:enumeration value="Proportional"/>
+			<xsd:enumeration value="Range"/>
+			<xsd:enumeration value="Rcv"/>
+			<xsd:enumeration value="SuperMajority"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ========== Interfaces Defined ========== -->
+	<!-- ========== Interfaces Extended ========== -->
+	<!-- ========== Classes ========== -->
+	<xsd:complexType name="BallotMeasureContest">
+		<xsd:complexContent>
+			<xsd:extension base="Contest">
+				<xsd:sequence>
+					<xsd:element name="SummaryText" type="InternationalizedText" minOccurs="0"/>
+					<xsd:element name="FullText" type="InternationalizedText" minOccurs="0"/>
+					<xsd:element name="ProStatement" type="InternationalizedText" minOccurs="0"/>
+					<xsd:element name="ConStatement" type="InternationalizedText" minOccurs="0"/>
+					<xsd:element name="EffectOfAbstain" type="InternationalizedText" minOccurs="0"/>
+					<xsd:element name="PassageThreshold" type="InternationalizedText" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="OtherType" type="xsd:string"/>
+				<xsd:attribute name="Type" type="BallotMeasureType" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BallotMeasureSelection">
+		<xsd:complexContent>
+			<xsd:extension base="BallotSelection">
+				<xsd:attribute name="Selection" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BallotSelection" abstract="true">
+		<xsd:sequence>
+			<!-- VoteCountsCollection is a container for wrapping multiple occurences of VoteCounts elements -->
+			<xsd:element name="VoteCountsCollection" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="VoteCounts" type="VoteCounts" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="BallotStyle">
+		<xsd:sequence>
+			<xsd:element name="OrderedContest" type="OrderedContest" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="GpUnitId" type="xsd:IDREF" maxOccurs="unbounded"/>
+			<xsd:element name="ImageUri" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Candidate">
+		<xsd:sequence>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BallotName" type="InternationalizedText"/>
+			<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0"/>
+			<xsd:element name="PersonId" type="xsd:IDREF" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="FileDate" type="xsd:dateTime"/>
+		<xsd:attribute name="Id" type="xsd:string"/>
+		<xsd:attribute name="IsIncumbent" type="xsd:boolean"/>
+		<xsd:attribute name="IsTopTicket" type="xsd:boolean"/>
+		<xsd:attribute name="PostElectionStatus" type="CandidatePostElectionStatus"/>
+		<xsd:attribute name="PreElectionStatus" type="CandidatePreElectionStatus"/>
+		<xsd:attribute name="SequenceOrder" type="xsd:integer"/>
+	</xsd:complexType>
+	<xsd:complexType name="CandidateContest">
+		<xsd:complexContent>
+			<xsd:extension base="Contest">
+				<xsd:sequence>
+					<xsd:element name="OfficeId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="PrimaryPartyId" type="xsd:IDREF" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="NumberElected" type="xsd:integer"/>
+				<xsd:attribute name="VotesAllowed" type="xsd:integer" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CandidateSelection">
+		<xsd:complexContent>
+			<xsd:extension base="BallotSelection">
+				<xsd:sequence>
+					<xsd:element name="CandidateId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="EndorsementPartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="IsWriteIn" type="xsd:boolean"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Coalition">
+		<xsd:complexContent>
+			<xsd:extension base="Party">
+				<xsd:sequence>
+					<xsd:element name="ContestId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Code">
+		<xsd:attribute name="OtherType" type="xsd:string"/>
+		<xsd:attribute name="Type" type="CodeType" use="required"/>
+		<xsd:attribute name="Value" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="ContactInformation">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AddressLine" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Email" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Fax" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Phone" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Schedule" type="Schedule" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Uri" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Contest" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BallotTitle" type="InternationalizedText" minOccurs="0"/>
+			<xsd:element name="BallotSubTitle" type="InternationalizedText" minOccurs="0"/>
+			<xsd:element name="BallotSelection" type="BallotSelection" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="JurisdictionalScopeId" type="xsd:IDREF"/>
+			<xsd:element name="SummaryCounts" type="SummaryCounts" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="Abbreviation" type="xsd:string"/>
+		<xsd:attribute name="HasRotation" type="xsd:boolean"/>
+		<xsd:attribute name="Name" type="xsd:string" use="required"/>
+		<xsd:attribute name="OtherVoteVariationType" type="xsd:string"/>
+		<xsd:attribute name="SequenceOrder" type="xsd:integer"/>
+		<xsd:attribute name="SubUnitsReported" type="xsd:integer"/>
+		<xsd:attribute name="TotalSubUnits" type="xsd:integer"/>
+		<xsd:attribute name="VoteVariationType" type="VoteVariationType"/>
+	</xsd:complexType>
+	<xsd:complexType name="CountStatus">
+		<xsd:attribute name="OtherType" type="xsd:string"/>
+		<xsd:attribute name="Status" type="CountItemStatus" use="required"/>
+		<xsd:attribute name="Type" type="CountItemType" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="Counts" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="Device" type="Device" minOccurs="0"/>
+			<xsd:element name="GpUnitId" type="xsd:IDREF" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="OtherType" type="xsd:string"/>
+		<xsd:attribute name="Type" type="CountItemType"/>
+	</xsd:complexType>
+	<xsd:complexType name="Device">
+		<xsd:attribute name="Manufacturer" type="xsd:string"/>
+		<xsd:attribute name="Model" type="xsd:string"/>
+		<xsd:attribute name="Type" type="DeviceType"/>
+	</xsd:complexType>
+	<xsd:complexType name="Election">
+		<xsd:sequence>
+			<xsd:element name="Name" type="InternationalizedText"/>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
+			<xsd:element name="ElectionScopeId" type="xsd:IDREF"/>
+			<xsd:element name="CountStatus" type="CountStatus" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BallotStyleCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="BallotStyle" type="BallotStyle" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CandidateCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Candidate" type="Candidate" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ContestCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Contest" type="Contest" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="Date" type="xsd:date" use="required"/>
+		<xsd:attribute name="EndDate" type="xsd:date"/>
+		<xsd:attribute name="Type" type="ElectionType" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="ElectionReport">
+		<xsd:sequence>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Notes" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="GpUnitCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="GpUnit" type="GpUnit" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PartyCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Party" type="Party" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PersonCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Person" type="Person" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="OfficeCollection" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Office" type="Office" minOccurs="1" maxOccurs="unbounded"/>
+						<xsd:element name="OfficeGroup" type="OfficeGroup" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Election" type="Election" minOccurs="0"/>
+			<xsd:element ref="ds:Signature" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Format" type="ReportDetailLevel" use="required"/>
+		<xsd:attribute name="GeneratedDate" type="xsd:dateTime" use="required"/>
+		<xsd:attribute name="IsTest" type="xsd:boolean"/>
+		<xsd:attribute name="Issuer" type="xsd:string" use="required"/>
+		<xsd:attribute name="IssuerAbbreviation" type="xsd:string" use="required"/>
+		<xsd:attribute name="Sequence" type="xsd:integer" use="required"/>
+		<xsd:attribute name="SequenceEnd" type="xsd:integer" use="required"/>
+		<xsd:attribute name="Status" type="ResultsStatus" use="required"/>
+		<xsd:attribute name="TestType" type="xsd:string"/>
+		<xsd:attribute name="VendorApplicationId" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="GpUnit" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ComposingGpUnitId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="SummaryCounts" type="SummaryCounts" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Hours">
+		<xsd:attribute name="Day" type="DayType"/>
+		<xsd:attribute name="EndTime" type="TimeWithZone" use="required"/>
+		<xsd:attribute name="StartTime" type="TimeWithZone" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="InternationalizedText">
+		<xsd:sequence>
+			<xsd:element name="LanguageString" type="LanguageString" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="Identifier" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="LanguageString">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Language" type="xsd:language" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Office">
+		<xsd:sequence>
+			<xsd:element name="Name" type="InternationalizedText"/>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Term" type="Term" minOccurs="0"/>
+			<xsd:element name="JurisdictionalScopeId" type="xsd:IDREF" minOccurs="0"/>
+			<xsd:element name="OfficeHolderId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="FilingDeadline" type="xsd:dateTime"/>
+		<xsd:attribute name="IsPartisan" type="xsd:boolean"/>
+	</xsd:complexType>
+	<xsd:complexType name="OfficeGroup">
+		<xsd:sequence>
+			<xsd:element name="OfficeId" type="xsd:IDREF" maxOccurs="unbounded"/>
+			<xsd:element name="SubOfficeGroup" type="OfficeGroup" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="Name" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="OrderedContest">
+		<xsd:sequence>
+			<xsd:element name="ContestId" type="xsd:IDREF"/>
+			<xsd:element name="OrderedBallotSelectionId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Party">
+		<xsd:sequence>
+			<xsd:element name="Name" type="InternationalizedText"/>
+			<xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="Abbreviation" type="xsd:string"/>
+		<xsd:attribute name="Color" type="HtmlColorString"/>
+		<xsd:attribute name="LogoUri" type="xsd:anyURI"/>
+	</xsd:complexType>
+	<xsd:complexType name="PartyContest">
+		<xsd:complexContent>
+			<xsd:extension base="Contest"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PartyRegistration">
+		<xsd:sequence>
+			<xsd:element name="PartyId" type="xsd:IDREF"/>
+		</xsd:sequence>
+		<xsd:attribute name="Count" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="PartySelection">
+		<xsd:complexContent>
+			<xsd:extension base="BallotSelection">
+				<xsd:sequence>
+					<xsd:element name="PartyId" type="xsd:IDREF" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Person">
+		<xsd:sequence>
+			<xsd:element name="FullName" type="InternationalizedText" minOccurs="0"/>
+			<xsd:element name="FirstName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="LastName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="MiddleName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Nickname" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Prefix" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Suffix" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Title" type="InternationalizedText" minOccurs="0"/>
+			<xsd:element name="Profession" type="InternationalizedText" minOccurs="0"/>
+			<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0"/>
+			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Gender" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+		<xsd:attribute name="DateOfBirth" type="xsd:date"/>
+	</xsd:complexType>
+	<xsd:complexType name="ReportingDevice">
+		<xsd:complexContent>
+			<xsd:extension base="GpUnit">
+				<xsd:sequence>
+					<xsd:element name="Device" type="Device" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="SerialNumber" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ReportingUnit">
+		<xsd:complexContent>
+			<xsd:extension base="GpUnit">
+				<xsd:sequence>
+					<xsd:element name="AuthorityId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
+					<xsd:element name="CountStatus" type="CountStatus" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="PartyRegistration" type="PartyRegistration" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="SpatialDimension" type="SpatialDimension" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="IsElectoralDistrict" type="xsd:boolean"/>
+				<xsd:attribute name="OtherType" type="xsd:string"/>
+				<xsd:attribute name="SubUnitsReported" type="xsd:integer"/>
+				<xsd:attribute name="TotalSubUnits" type="xsd:integer"/>
+				<xsd:attribute name="Type" type="ReportingUnitType" use="required"/>
+				<xsd:attribute name="VotersParticipated" type="xsd:integer"/>
+				<xsd:attribute name="VotersRegistered" type="xsd:integer"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RetentionContest">
+		<xsd:complexContent>
+			<xsd:extension base="BallotMeasureContest">
+				<xsd:sequence>
+					<xsd:element name="CandidateId" type="xsd:IDREF"/>
+					<xsd:element name="OfficeId" type="xsd:IDREF" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Schedule">
+		<xsd:sequence>
+			<xsd:element name="Hours" type="Hours" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="EndDate" type="xsd:date"/>
+		<xsd:attribute name="IsOnlyByAppointment" type="xsd:boolean"/>
+		<xsd:attribute name="IsOrByAppointment" type="xsd:boolean"/>
+		<xsd:attribute name="IsSubjectToChange" type="xsd:boolean"/>
+		<xsd:attribute name="StartDate" type="xsd:date"/>
+	</xsd:complexType>
+	<xsd:complexType name="SpatialDimension">
+		<xsd:sequence>
+			<xsd:element name="SpatialExtent" type="SpatialExtent" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="MapUri" type="xsd:anyURI"/>
+	</xsd:complexType>
+	<xsd:complexType name="SpatialExtent">
+		<xsd:sequence>
+			<xsd:element name="Coordinates" type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute name="Format" type="GeoSpatialFormat" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SummaryCounts">
+		<xsd:complexContent>
+			<xsd:extension base="Counts">
+				<xsd:attribute name="BallotsCast" type="xsd:integer"/>
+				<xsd:attribute name="BallotsOutstanding" type="xsd:integer"/>
+				<xsd:attribute name="BallotsRejected" type="xsd:integer"/>
+				<xsd:attribute name="Overvotes" type="xsd:integer"/>
+				<xsd:attribute name="Undervotes" type="xsd:integer"/>
+				<xsd:attribute name="WriteIns" type="xsd:integer"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Term">
+		<xsd:attribute name="EndDate" type="xsd:date"/>
+		<xsd:attribute name="StartDate" type="xsd:date"/>
+		<xsd:attribute name="Type" type="OfficeTermType"/>
+	</xsd:complexType>
+	<xsd:complexType name="VoteCounts">
+		<xsd:complexContent>
+			<xsd:extension base="Counts">
+				<xsd:attribute name="Count" type="xsd:float" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>
