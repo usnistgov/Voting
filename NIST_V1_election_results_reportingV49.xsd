@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Version 48,  September 4, 2015, National Institute of Standards and Technology -->
+<!-- Version 1.0-49,  September 4, 2015, NIST ElectionResultsReporting, National Institute of Standards and Technology -->
 <xsd:schema xmlns="NIST_V1_election_results_reporting.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="NIST_V1_election_results_reporting.xsd" elementFormDefault="qualified" version="1.0">
 	<!-- ========== Imports ========== -->
 	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
@@ -303,7 +303,7 @@
 	<xsd:complexType name="Contest" abstract="true">
 		<xsd:sequence>
 			<xsd:element name="Abbreviation" type="xsd:string" minOccurs="0"/>
-			<xsd:element name="BallotSelection" type="BallotSelection" minOccurs="0" maxOccurs="unbounded"/>			
+			<xsd:element name="BallotSelection" type="BallotSelection" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="BallotSubTitle" type="InternationalizedText" minOccurs="0"/>
 			<xsd:element name="BallotTitle" type="InternationalizedText" minOccurs="0"/>
 			<xsd:element name="CountStatus" type="CountStatus" minOccurs="0" maxOccurs="unbounded"/>
