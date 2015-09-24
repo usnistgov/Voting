@@ -141,6 +141,7 @@
 	<xsd:simpleType name="ReportingUnitType">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="ballot-batch"/>
+			<xsd:enumeration value="ballot-style-area"/>
 			<xsd:enumeration value="city"/>
 			<xsd:enumeration value="city-council"/>
 			<xsd:enumeration value="combined-precinct"/>
@@ -315,7 +316,7 @@
 					</xsd:sequence>
 					<xsd:attribute name="label" type="xsd:string"/>
 				</xsd:complexType>
-			</xsd:element>			
+			</xsd:element>
 			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
 			<xsd:element name="Phone" type="AnnotatedString" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Schedule" type="Schedule" minOccurs="0" maxOccurs="unbounded"/>
@@ -602,6 +603,7 @@
 					<xsd:element name="CountStatus" type="CountStatus" minOccurs="0" maxOccurs="unbounded"/>
 					<xsd:element name="ElectionAdministration" type="ElectionAdministration" minOccurs="0"/>
 					<xsd:element name="IsDistricted" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="IsMailOnly" type="xsd:boolean" minOccurs="0"/>
 					<xsd:element name="Number" type="xsd:string" minOccurs="0"/>
 					<xsd:element name="PartyRegistration" type="PartyRegistration" minOccurs="0" maxOccurs="unbounded"/>
 					<xsd:element name="SpatialDimension" type="SpatialDimension" minOccurs="0"/>
