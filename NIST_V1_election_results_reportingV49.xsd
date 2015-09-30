@@ -370,14 +370,14 @@
 	</xsd:complexType>
 	<xsd:complexType name="Election">
 		<xsd:sequence>
-			<xsd:element name="BallotStyleCollection" minOccurs="0">
+			<xsd:element name="BallotStyleCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="BallotStyle" type="BallotStyle" maxOccurs="unbounded"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="CandidateCollection" minOccurs="0">
+			<xsd:element name="CandidateCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Candidate" type="Candidate" maxOccurs="unbounded"/>
@@ -385,7 +385,7 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
-			<xsd:element name="ContestCollection" minOccurs="0">
+			<xsd:element name="ContestCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Contest" type="Contest" maxOccurs="unbounded"/>
@@ -414,7 +414,7 @@
 			<xsd:element name="ExternalIdentifiers" type="ExternalIdentifiers" minOccurs="0"/>
 			<xsd:element name="Format" type="ReportDetailLevel"/>
 			<xsd:element name="GeneratedDate" type="xsd:dateTime"/>
-			<xsd:element name="GpUnitCollection" minOccurs="0">
+			<xsd:element name="GpUnitCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="GpUnit" type="GpUnit" maxOccurs="unbounded"/>
@@ -425,7 +425,7 @@
 			<xsd:element name="IssuerAbbreviation" type="xsd:string"/>
 			<xsd:element name="IsTest" type="xsd:boolean" minOccurs="0"/>
 			<xsd:element name="Notes" type="xsd:string" minOccurs="0"/>
-			<xsd:element name="OfficeCollection" minOccurs="0">
+			<xsd:element name="OfficeCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Office" type="Office" maxOccurs="unbounded"/>
@@ -433,14 +433,14 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="PartyCollection" minOccurs="0">
+			<xsd:element name="PartyCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Party" type="Party" maxOccurs="unbounded"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="PersonCollection" minOccurs="0">
+			<xsd:element name="PersonCollection" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Person" type="Person" maxOccurs="unbounded"/>
