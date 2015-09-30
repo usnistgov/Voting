@@ -195,9 +195,7 @@
 			<xsd:enumeration value="other"/>
 		</xsd:restriction>
 	</xsd:simpleType>
-	<!-- ========== Interfaces Defined ========== -->
-	<!-- ========== Interfaces Extended ========== -->
-	<!-- ========== Classes ========== -->
+	<!-- ========== Elements ========== -->
 	<xsd:complexType name="AnnotatedString">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
