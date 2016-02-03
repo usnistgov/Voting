@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Version 1.0-49,  September 4, 2015, NIST ElectionResultsReporting, National Institute of Standards and Technology -->
-<xsd:schema xmlns="NIST_V1_election_results_reporting.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="NIST_V1_election_results_reporting.xsd" elementFormDefault="qualified" version="1.0">
+<!-- Version 1.0-50, January 11, 2016, NIST Election Results CDF Specification, National Institute of Standards and Technology -->
+<xsd:schema xmlns="NIST_V1_election_results.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="NIST_V1_election_results.xsd" elementFormDefault="qualified" version="1.0">
 	<!-- ========== Imports ========== -->
 	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
 	<!-- ========== Roots ========== -->
@@ -142,6 +142,7 @@
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="ballot-batch"/>
 			<xsd:enumeration value="ballot-style-area"/>
+			<xsd:enumeration value="borough"/>
 			<xsd:enumeration value="city"/>
 			<xsd:enumeration value="city-council"/>
 			<xsd:enumeration value="combined-precinct"/>
@@ -245,10 +246,10 @@
 	<xsd:complexType name="BallotStyle">
 		<xsd:sequence>
 			<xsd:element name="ExternalIdentifiers" type="ExternalIdentifiers" minOccurs="0"/>
-			<xsd:element name="GpUnitId" type="xsd:IDREF" maxOccurs="unbounded"/>
+			<xsd:element name="GpUnitIds" type="xsd:IDREFS"/>
 			<xsd:element name="ImageUri" type="xsd:anyURI" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="OrderedContest" type="OrderedContest" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PartyIds" type="xsd:IDREFS" minOccurs="0"/>
 		</xsd:sequence>
 		<xsd:attribute name="objectId" type="xsd:ID" use="required"/>
 	</xsd:complexType>
@@ -271,8 +272,8 @@
 			<xsd:extension base="Contest">
 				<xsd:sequence>
 					<xsd:element name="NumberElected" type="xsd:integer" minOccurs="0"/>
-					<xsd:element name="OfficeId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="PrimaryPartyId" type="xsd:IDREF" minOccurs="0"/>
+					<xsd:element name="OfficeIds" type="xsd:IDREFS" minOccurs="0"/>
+					<xsd:element name="PrimaryPartyIds" type="xsd:IDREFS" minOccurs="0"/>
 					<xsd:element name="VotesAllowed" type="xsd:integer"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -282,8 +283,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="BallotSelection">
 				<xsd:sequence>
-					<xsd:element name="CandidateId" type="xsd:IDREF" maxOccurs="unbounded"/>
-					<xsd:element name="EndorsementPartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="CandidateIds" type="xsd:IDREFS"/>
+					<xsd:element name="EndorsementPartyIds" type="xsd:IDREFS" minOccurs="0"/>
 					<xsd:element name="IsWriteIn" type="xsd:boolean" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -293,8 +294,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="Party">
 				<xsd:sequence>
-					<xsd:element name="ContestId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="ContestIds" type="xsd:IDREFS" minOccurs="0"/>
+					<xsd:element name="PartyIds" type="xsd:IDREFS" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -368,14 +369,14 @@
 	</xsd:complexType>
 	<xsd:complexType name="Election">
 		<xsd:sequence>
-			<xsd:element name="BallotStyleCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="BallotStyleCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="BallotStyle" type="BallotStyle" maxOccurs="unbounded"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="CandidateCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="CandidateCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Candidate" type="Candidate" maxOccurs="unbounded"/>
@@ -383,7 +384,7 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
-			<xsd:element name="ContestCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="ContestCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Contest" type="Contest" maxOccurs="unbounded"/>
@@ -395,14 +396,15 @@
 			<xsd:element name="ExternalIdentifiers" type="ExternalIdentifiers" minOccurs="0"/>
 			<xsd:element name="Name" type="InternationalizedText"/>
 			<xsd:element name="StartDate" type="xsd:date"/>
-			<xsd:element name="EndDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="EndDate" type="xsd:date"/>
 			<xsd:element name="Type" type="ElectionType"/>
+			<xsd:element name="OtherType" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="ElectionAdministration">
 		<xsd:sequence>
 			<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
-			<xsd:element name="ElectionOfficialPersonId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ElectionOfficialPersonIds" type="xsd:IDREFS" minOccurs="0"/>
 			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -412,7 +414,7 @@
 			<xsd:element name="ExternalIdentifiers" type="ExternalIdentifiers" minOccurs="0"/>
 			<xsd:element name="Format" type="ReportDetailLevel"/>
 			<xsd:element name="GeneratedDate" type="xsd:dateTime"/>
-			<xsd:element name="GpUnitCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="GpUnitCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="GpUnit" type="GpUnit" maxOccurs="unbounded"/>
@@ -423,7 +425,7 @@
 			<xsd:element name="IssuerAbbreviation" type="xsd:string"/>
 			<xsd:element name="IsTest" type="xsd:boolean" minOccurs="0"/>
 			<xsd:element name="Notes" type="xsd:string" minOccurs="0"/>
-			<xsd:element name="OfficeCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="OfficeCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Office" type="Office" maxOccurs="unbounded"/>
@@ -431,14 +433,14 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="PartyCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="PartyCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Party" type="Party" maxOccurs="unbounded"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="PersonCollection" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="PersonCollection" minOccurs="0" maxOccurs="1">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Person" type="Person" maxOccurs="unbounded"/>
@@ -470,7 +472,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="GpUnit" abstract="true">
 		<xsd:sequence>
-			<xsd:element name="ComposingGpUnitId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ComposingGpUnitIds" type="xsd:IDREFS" minOccurs="0"/>
 			<xsd:element name="ExternalIdentifiers" type="ExternalIdentifiers" minOccurs="0"/>
 			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
 			<xsd:element name="SummaryCounts" type="SummaryCounts" minOccurs="0" maxOccurs="unbounded"/>
@@ -506,7 +508,7 @@
 			<xsd:element name="FilingDeadline" type="xsd:date" minOccurs="0"/>
 			<xsd:element name="IsPartisan" type="xsd:boolean" minOccurs="0"/>
 			<xsd:element name="Name" type="InternationalizedText"/>
-			<xsd:element name="OfficeHolderPersonId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="OfficeHolderPersonIds" type="xsd:IDREFS" minOccurs="0"/>
 			<xsd:element name="Term" minOccurs="0">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -523,7 +525,7 @@
 	<xsd:complexType name="OfficeGroup">
 		<xsd:sequence>
 			<xsd:element name="Name" type="xsd:string"/>
-			<xsd:element name="OfficeId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="OfficeIds" type="xsd:IDREFS" minOccurs="0"/>
 			<xsd:element name="SubOfficeGroup" type="OfficeGroup" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="label" type="xsd:string"/>
@@ -531,7 +533,7 @@
 	<xsd:complexType name="OrderedContest">
 		<xsd:sequence>
 			<xsd:element name="ContestId" type="xsd:IDREF"/>
-			<xsd:element name="OrderedBallotSelectionId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="OrderedBallotSelectionIds" type="xsd:IDREFS" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="Party">
@@ -559,7 +561,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="BallotSelection">
 				<xsd:sequence>
-					<xsd:element name="PartyId" type="xsd:IDREF" maxOccurs="unbounded"/>
+					<xsd:element name="PartyIds" type="xsd:IDREFS"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -596,7 +598,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="GpUnit">
 				<xsd:sequence>
-					<xsd:element name="AuthorityId" type="xsd:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="AuthorityIds" type="xsd:IDREFS" minOccurs="0"/>
 					<xsd:element name="ContactInformation" type="ContactInformation" minOccurs="0"/>
 					<xsd:element name="CountStatus" type="CountStatus" minOccurs="0" maxOccurs="unbounded"/>
 					<xsd:element name="ElectionAdministration" type="ElectionAdministration" minOccurs="0"/>
