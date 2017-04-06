@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version 1.0, 2017-03-08, Election Event Logging, National Institute of Standards and Technology -->
+<xsd:schema xmlns="NIST_V1_election_event_logging.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="NIST_V1_election_event_logging.xsd" elementFormDefault="qualified" version="1.0">
+	<!-- ========== Imports ========== -->
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
+	<!-- ========== Roots ========== -->
+	<xsd:element name="ElectionEventLog" type="ElectionEventLog"/>
+	<!-- ========== Primitives ========== -->
+	<!-- ========== Enumerations ========== -->
+	<xsd:simpleType name="DeviceUsage">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ballot-printing"/>
+			<xsd:enumeration value="electronic"/>
+			<xsd:enumeration value="ems"/>
+			<xsd:enumeration value="epollbook"/>
+			<xsd:enumeration value="mixed-systems"/>
+			<xsd:enumeration value="scan"/>
+			<xsd:enumeration value="scan-central"/>
+			<xsd:enumeration value="scan-precinct"/>
+			<xsd:enumeration value="tabulator"/>
+			<xsd:enumeration value="transmission-client"/>
+			<xsd:enumeration value="transmission-host"/>
+			<xsd:enumeration value="unknown"/>
+			<xsd:enumeration value="other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DispositionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="failure"/>
+			<xsd:enumeration value="na"/>
+			<xsd:enumeration value="success"/>
+			<xsd:enumeration value="other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ========== Elements ========== -->
+	<xsd:complexType name="Device">
+		<xsd:sequence>
+			<xsd:element name="Details" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ElectionEvent" type="ElectionEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+		<xsd:attribute name="manufacturer" type="xsd:string"/>
+		<xsd:attribute name="model" type="xsd:string"/>
+		<xsd:attribute name="usage" type="DeviceUsage"/>
+		<xsd:attribute name="otherUsage" type="xsd:string"/>
+		<xsd:attribute name="version" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ElectionEvent">
+		<xsd:sequence>
+			<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Details" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="disposition" type="DispositionType" use="required"/>
+		<xsd:attribute name="otherDisposition" type="xsd:string"/>
+		<xsd:attribute name="hash" type="xsd:string"/>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+		<xsd:attribute name="sequence" type="xsd:string" use="required"/>
+		<xsd:attribute name="severity" type="xsd:string"/>
+		<xsd:attribute name="timeStamp" type="xsd:dateTime" use="required"/>
+		<xsd:attribute name="type" type="xsd:string" use="required"/>
+		<xsd:attribute name="userId" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ElectionEventLog">
+		<xsd:sequence>
+			<xsd:element name="Details" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Device" type="Device" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ds:Signature" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="electionId" type="xsd:string"/>
+		<xsd:attribute name="generatedTime" type="xsd:dateTime" use="required"/>
+	</xsd:complexType>
+</xsd:schema>
