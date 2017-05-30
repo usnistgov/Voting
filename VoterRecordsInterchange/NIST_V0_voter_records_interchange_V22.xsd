@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="NIST_V1_voter_records_interchange.xsd" version="1.0" xmlns="NIST_V1_voter_records_interchange.xsd" xmlns:addr="http://www.fgdc.gov/schemas/address/addr" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ========== Imports ========== -->
+  <xsd:import namespace="http://www.fgdc.gov/schemas/address/addr" schemaLocation="addr.xsd"/>
+  <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
+  <!-- ========== Roots ========== -->
+  <xsd:element name="VoterRecordsRequest" type="VoterRecordsRequest"/>
+  <xsd:element name="VoterRecordsResponse" type="VoterRecordsResponse"/>
+  <!-- ========== Primitives ========== -->
+  <!-- ========== Enumerations ========== -->
+  <xsd:simpleType name="AbsenteeBallotRequestSemantics">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="request-ab-for-all-elections-this-year"/>
+      <xsd:enumeration value="request-ab-for-next-election"/>
+      <xsd:enumeration value="request-ab-for-specified-elections"/>
+      <xsd:enumeration value="request-permanent-absentee-status"/>
+      <xsd:enumeration value="request-permanent-vote-by-mail-status"/>
+      <xsd:enumeration value="unknown"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="AssertionValue">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="no"/>
+      <xsd:enumeration value="yes"/>
+      <xsd:enumeration value="unknown"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BallotReceiptMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="email"/>
+      <xsd:enumeration value="email-or-online"/>
+      <xsd:enumeration value="fax"/>
+      <xsd:enumeration value="mail"/>
+      <xsd:enumeration value="online"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ContactMethodType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="email"/>
+      <xsd:enumeration value="phone"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="IdentifierType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fips"/>
+      <xsd:enumeration value="local-level"/>
+      <xsd:enumeration value="national-level"/>
+      <xsd:enumeration value="ocd-id"/>
+      <xsd:enumeration value="state-level"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PhoneCapability">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fax"/>
+      <xsd:enumeration value="mms"/>
+      <xsd:enumeration value="sms"/>
+      <xsd:enumeration value="voice"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationError">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="identity-lookup-failed"/>
+      <xsd:enumeration value="incomplete"/>
+      <xsd:enumeration value="incomplete-address"/>
+      <xsd:enumeration value="incomplete-name"/>
+      <xsd:enumeration value="ineligible"/>
+      <xsd:enumeration value="invalid-form"/>
+      <xsd:enumeration value="no-birth-date"/>
+      <xsd:enumeration value="no-signature"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationForm">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fpca"/>
+      <xsd:enumeration value="nvra"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationHelperType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="assistant"/>
+      <xsd:enumeration value="witness"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="armed-forces-recruitment-office"/>
+      <xsd:enumeration value="motor-vehicle-office"/>
+      <xsd:enumeration value="other-agency-designated-by-state"/>
+      <xsd:enumeration value="public-assistance-office"/>
+      <xsd:enumeration value="registration-drive-from-advocacy-group-or-political-party"/>
+      <xsd:enumeration value="state-funded-agency-serving-persons-with-disabilities"/>
+      <xsd:enumeration value="voter-via-election-registrars-office"/>
+      <xsd:enumeration value="voter-via-email"/>
+      <xsd:enumeration value="voter-via-fax"/>
+      <xsd:enumeration value="voter-via-internet"/>
+      <xsd:enumeration value="voter-via-mail"/>
+      <xsd:enumeration value="unknown"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationProxyType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="armed-forces-recruitment-office"/>
+      <xsd:enumeration value="motor-vehicle-office"/>
+      <xsd:enumeration value="other-agency-designated-by-state"/>
+      <xsd:enumeration value="public-assistance-office"/>
+      <xsd:enumeration value="registration-drive-from-advocacy-group-or-political-party"/>
+      <xsd:enumeration value="state-funded-agency-serving-persons-with-disabilities"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RegistrationRequestType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="registration"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ReportingUnitType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ballot-batch"/>
+      <xsd:enumeration value="ballot-style-area"/>
+      <xsd:enumeration value="borough"/>
+      <xsd:enumeration value="city"/>
+      <xsd:enumeration value="city-council"/>
+      <xsd:enumeration value="combined-precinct"/>
+      <xsd:enumeration value="congressional"/>
+      <xsd:enumeration value="county"/>
+      <xsd:enumeration value="county-council"/>
+      <xsd:enumeration value="drop-box"/>
+      <xsd:enumeration value="judicial"/>
+      <xsd:enumeration value="municipality"/>
+      <xsd:enumeration value="polling-place"/>
+      <xsd:enumeration value="precinct"/>
+      <xsd:enumeration value="school"/>
+      <xsd:enumeration value="special"/>
+      <xsd:enumeration value="split-precinct"/>
+      <xsd:enumeration value="state"/>
+      <xsd:enumeration value="state-house"/>
+      <xsd:enumeration value="state-senate"/>
+      <xsd:enumeration value="town"/>
+      <xsd:enumeration value="township"/>
+      <xsd:enumeration value="utility"/>
+      <xsd:enumeration value="village"/>
+      <xsd:enumeration value="vote-center"/>
+      <xsd:enumeration value="ward"/>
+      <xsd:enumeration value="water"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SignatureSource">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="dmv"/>
+      <xsd:enumeration value="local"/>
+      <xsd:enumeration value="state"/>
+      <xsd:enumeration value="voter"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SignatureType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="digital"/>
+      <xsd:enumeration value="dynamic"/>
+      <xsd:enumeration value="electronic"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SuccessAction">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="address-updated"/>
+      <xsd:enumeration value="name-updated"/>
+      <xsd:enumeration value="registration-cancelled"/>
+      <xsd:enumeration value="registration-created"/>
+      <xsd:enumeration value="registration-updated"/>
+      <xsd:enumeration value="status-updated"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="VoterClassificationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="eighteen-on-election-day"/>
+      <xsd:enumeration value="deceased"/>
+      <xsd:enumeration value="declared-incompetent"/>
+      <xsd:enumeration value="felon"/>
+      <xsd:enumeration value="permanently-denied"/>
+      <xsd:enumeration value="protected-voter"/>
+      <xsd:enumeration value="restored-felon"/>
+      <xsd:enumeration value="united-states-citizen"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="VoterIdType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="drivers-license"/>
+      <xsd:enumeration value="local-voter-registration-id"/>
+      <xsd:enumeration value="ssn"/>
+      <xsd:enumeration value="ssn4"/>
+      <xsd:enumeration value="state-id"/>
+      <xsd:enumeration value="state-voter-registration-id"/>
+      <xsd:enumeration value="unspecified-document-with-name-and-address"/>
+      <xsd:enumeration value="unspecified-document-with-photo-identification"/>
+      <xsd:enumeration value="unknown"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- ========== Interfaces Defined ========== -->
+  <!-- === Interface Address === -->
+  <xsd:group name="Address">
+    <xsd:choice>
+      <xsd:element name="CommunityAddress_type" type="addr:CommunityAddress_type"/>
+      <xsd:element name="FourNumberAddressRange_type" type="addr:FourNumberAddressRange_type"/>
+      <xsd:element name="GeneralAddressClass_type" type="addr:GeneralAddressClass_type"/>
+      <xsd:element name="IntersectionAddress_type" type="addr:IntersectionAddress_type"/>
+      <xsd:element name="LandmarkAddress_type" type="addr:LandmarkAddress_type"/>
+      <xsd:element name="NumberedThoroughfareAddress_type" type="addr:NumberedThoroughfareAddress_type"/>
+      <xsd:element name="TwoNumberAddressRange_type" type="addr:TwoNumberAddressRange_type"/>
+      <xsd:element name="USPSGeneralDeliveryOffice_type" type="addr:USPSGeneralDeliveryOffice_type"/>
+      <xsd:element name="USPSPostalDeliveryBox_type" type="addr:USPSPostalDeliveryBox_type"/>
+      <xsd:element name="USPSPostalDeliveryRoute_type" type="addr:USPSPostalDeliveryRoute_type"/>
+      <xsd:element name="UnnumberedThoroughfareAddress_type" type="addr:UnnumberedThoroughfareAddress_type"/>
+    </xsd:choice>
+  </xsd:group>
+  <!-- ========== Interfaces Extended ========== -->
+  <!-- ========== Classes ========== -->
+  <xsd:complexType name="AbsenteeBallotRequest">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="SpecifiedElection" type="Election"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Semantics" type="AbsenteeBallotRequestSemantics" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="AdditionalInfo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FileValue" type="File"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Name" type="xsd:string" use="required"/>
+    <xsd:attribute name="StringValue" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="ContactMethod">
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="Type" type="ContactMethodType" use="required"/>
+    <xsd:attribute name="Value" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="Election">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdenitfier" type="xsd:IDREF"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Name" type="xsd:string"/>
+    <xsd:attribute name="StartDate" type="xsd:date"/>
+  </xsd:complexType>
+  <xsd:complexType name="ElectionAdministration">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Location" type="Location"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ContactMethod" type="ContactMethod"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Uri" type="xsd:anyURI"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Name" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="ExternalIdentifier">
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="Type" type="IdentifierType" use="required"/>
+    <xsd:attribute name="Value" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="File">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:base64Binary">
+        <xsd:attribute name="fileName" type="xsd:string"/>
+        <xsd:attribute name="mimeType" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Image">
+    <xsd:complexContent>
+      <xsd:extension base="File">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="LatLng">
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Latitude" type="xsd:float" use="required"/>
+    <xsd:attribute name="Longitude" type="xsd:float" use="required"/>
+    <xsd:attribute name="Source" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="Location">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="LatLng" type="LatLng"/>
+      <xsd:element minOccurs="0" name="Address">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Directions" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="Name">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="MiddleName" type="xsd:string"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="FirstName" type="xsd:string"/>
+    <xsd:attribute name="FullName" type="xsd:string"/>
+    <xsd:attribute name="LastName" type="xsd:string"/>
+    <xsd:attribute name="Prefix" type="xsd:string"/>
+    <xsd:attribute name="Suffix" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="Party">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdentifier" type="ExternalIdentifier"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Abbreviation" type="xsd:string"/>
+    <xsd:attribute name="Name" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneContactMethod">
+    <xsd:complexContent>
+      <xsd:extension base="ContactMethod">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="Capability" type="PhoneCapability"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegistrationAcknowledgement">
+    <xsd:complexContent>
+      <xsd:extension base="VoterRecordsResponse">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegistrationHelper">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Name" type="Name"/>
+      <xsd:element minOccurs="0" name="Signature" type="Signature"/>
+      <xsd:element minOccurs="0" name="Address">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="Phone" type="PhoneContactMethod"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Type" type="RegistrationHelperType" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="RegistrationProxy">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Address">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="Phone" type="xsd:IDREF"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Name" type="xsd:string"/>
+    <xsd:attribute name="OriginTransactionId" type="xsd:string"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="TimeStamp" type="xsd:date"/>
+    <xsd:attribute name="Type" type="RegistrationProxyType" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="RegistrationRejection">
+    <xsd:complexContent>
+      <xsd:extension base="VoterRecordsResponse">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="AdditionalDetails" type="xsd:string"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="Error" type="RegistrationError"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="OtherError" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegistrationSuccess">
+    <xsd:complexContent>
+      <xsd:extension base="VoterRecordsResponse">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="Action" type="SuccessAction"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="Districts" type="ReportingUnit"/>
+          <xsd:element minOccurs="0" name="PollingPlace" type="xsd:IDREF"/>
+          <xsd:element minOccurs="0" name="Precinct" type="xsd:IDREF"/>
+        </xsd:sequence>
+        <xsd:attribute name="EffectiveDate" type="xsd:date"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReportingUnit">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Location" type="xsd:IDREF"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdentifier" type="xsd:IDREF"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="IsDistricted" type="xsd:boolean"/>
+    <xsd:attribute name="Name" type="xsd:string"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="Type" type="ReportingUnitType" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="Signature">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FileValue" type="Image"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Date" type="xsd:date"/>
+    <xsd:attribute name="OtherSource" type="xsd:string"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="Source" type="SignatureSource"/>
+    <xsd:attribute name="Type" type="SignatureType"/>
+  </xsd:complexType>
+  <xsd:complexType name="VoterClassification">
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="Assertion" type="AssertionValue" use="required"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="Type" type="VoterClassificationType" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="VoterId">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FileValue" type="xsd:IDREF"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="AttestNoSuchId" type="xsd:boolean"/>
+    <xsd:attribute name="DateOfIssuance" type="xsd:date"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="StringValue" type="xsd:string"/>
+    <xsd:attribute name="Type" type="VoterIdType" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="VoterRecordsRequest">
+    <xsd:sequence>
+      <xsd:element name="VoterRegistration" type="VoterRegistration"/>
+      <xsd:element minOccurs="0" name="AbsenteeBallotRequest" type="AbsenteeBallotRequest"/>
+      <xsd:element minOccurs="0" ref="xsd:IDREF"/>
+      <xsd:element maxOccurs="unbounded" name="Type" type="RegistrationRequestType"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="GeneratedDate" type="xsd:date" use="required"/>
+    <xsd:attribute name="Issuer" type="xsd:string"/>
+    <xsd:attribute name="OtherType" type="xsd:string"/>
+    <xsd:attribute name="TransactionId" type="xsd:string"/>
+    <xsd:attribute name="VendorApplicationId" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType abstract="true" name="VoterRecordsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ElectionAdministration" type="ElectionAdministration"/>
+      <xsd:element minOccurs="0" ref="xsd:IDREF"/>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="TransactionId" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType name="VoterRegistration">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Party" type="Party"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="AdditionalInfo" type="AdditionalInfo"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="VoterId" type="VoterId"/>
+      <xsd:element name="Name" type="xsd:IDREF"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="VoterClassification" type="VoterClassification"/>
+      <xsd:element minOccurs="0" name="Signature" type="xsd:IDREF"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ContactMethod" type="xsd:IDREF"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="RegistrationHelper" type="RegistrationHelper"/>
+      <xsd:element minOccurs="0" name="RegistrationProxy" type="RegistrationProxy"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="BallotReceiptPreference" type="BallotReceiptMethod"/>
+      <xsd:element minOccurs="0" name="MailForwardingAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="MailingAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PreviousName" type="xsd:IDREF"/>
+      <xsd:element minOccurs="0" name="PreviousRegistrationAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="0" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="PreviousSignature" type="xsd:IDREF"/>
+      <xsd:element name="RegistrationAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group maxOccurs="1" minOccurs="1" ref="Address"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="object_id" type="xsd:ID" use="required"/>
+    <xsd:attribute name="DateOfBirth" type="xsd:date"/>
+    <xsd:attribute name="Ethnicity" type="xsd:string"/>
+    <xsd:attribute name="Gender" type="xsd:string"/>
+    <xsd:attribute name="LastDateOfUSResidency" type="xsd:date"/>
+    <xsd:attribute name="OtherRegistrationForm" type="xsd:string"/>
+    <xsd:attribute name="OtherRegistrationMethod" type="xsd:string"/>
+    <xsd:attribute name="OverseasEmployer" type="xsd:string"/>
+    <xsd:attribute name="RegistrationAddressIsMailingAddress" type="xsd:boolean"/>
+    <xsd:attribute name="RegistrationForm" type="RegistrationForm"/>
+    <xsd:attribute name="RegistrationMethod" type="RegistrationMethod" use="required"/>
+    <xsd:attribute name="SelectedLanguage" type="xsd:language"/>
+  </xsd:complexType>
+</xsd:schema>
