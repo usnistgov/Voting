@@ -7,8 +7,8 @@ NIST's election CDF project has the goal of (a) specifying a common import/expor
 There are currently 4 CDF projects under active development in this repository:
 
 1. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is now located at https://github.com/usnistgov/CastVoteRecords
-2. Election Event Logging - election-related events logged by election devices
+2. Election Event Logging - election-related events logged by election devices - the repository is now located at https://github.com/usnistgov/ElectionEventLogging
 3. Election Results Reporting - pre- and post-election information and results - the repository is now located at https://github.com/usnistgov/ElectionResultsReporting
-4. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges
+4. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges - the repository is now located at https://github.com/usnistgov/VoterRecordsInterchange
 
 Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more information.
