@@ -6,9 +6,14 @@ NIST's election CDF project has the goal of (a) specifying a common import/expor
 
 There are currently 4 CDF projects under active development in this repository:
 
-1. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is located at https://github.com/usnistgov/CastVoteRecords
-2. Election Event Logging - election-related events logged by election devices - the repository is located at https://github.com/usnistgov/ElectionEventLogging
-3. Election Results Reporting - pre- and post-election information and results - the repository is located at https://github.com/usnistgov/ElectionResultsReporting
-4. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges - the repository is located at https://github.com/usnistgov/VoterRecordsInterchange
+1. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is located at https://github.com/usnistgov/CastVoteRecords.
+2. Election Event Logging - election-related events logged by election devices - the repository is located at https://github.com/usnistgov/ElectionEventLogging.
+3. Election Results Reporting - pre- and post-election information and results - the repository is located at https://github.com/usnistgov/ElectionResultsReporting.
+4. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges - the repository is located at https://github.com/usnistgov/VoterRecordsInterchange.
 
 Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more information.
+
+There are additionally two other CDF-related projects under active development:
+
+5. Election Business Process Modeling - for defining and modeling election processes for the purposes of informing use case development for CDF projects and showing where interoperability between processes may be beneficial and worthwhile to pursue - the repository is located at https://github.com/usnistgov/ElectionModeling. Contact [John Dziurlaj](mailto:jndvoting@gmail.com) for questions and more information.
+6. Voting Methods, Tabulation, and Data Interoperability - for formally defining voting variations, e.g., n-of-m voting, range voting, ranked choice voting, so that the variations are implemented accurately and uniformly across all voting equipment and can be tested likewise - the repository is located at https://github.com/usnistgov/VotingMethods. Contact [Lauren Massa-Lochridge](mailto:lauren.lochridge.sf@gmail.com) for questions and answers.
