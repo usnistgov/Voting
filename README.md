@@ -9,6 +9,8 @@ There are currently 2 sets of next VVSG requirements related to interoperability
 1. Principles & Guidelines 1.1 - High Quality Design
 2. Principles & Guidelines 4 - Interoperability
 
+There is also an election glossary of terms, many of which are used in the next VVSG, located at https://github.com/HiltonRoscoe/GlossaryMD/blob/master/vvsg_living_glossary.md.
+
 There are currently 6 CDF projects under active development, located in the following repositories:
 
 1. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is located at https://github.com/usnistgov/CastVoteRecords.
