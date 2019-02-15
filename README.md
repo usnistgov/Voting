@@ -1,10 +1,15 @@
-# Voting - NIST Voting Program
+# Voting - Files related to the NIST Voting program.
 
-This repository holds information associated with the NIST Voting Program.  It currently holds information about the election common data format (CDF) project and related information and files that are being created by NIST and collaborators.  
+This repository holds information associated with the NIST Voting Program.  It currently holds information about the election common data format (CDF) project and related information and files that are being created by NIST and collaborators.  This includes drafts of next VVSG requirements related to interoperability and the CDFs.
 
 NIST's election CDF project has the goal of (a) specifying a common import/export format for election devices such as electronic pollbooks, election management systems, and vote capture devices, and (b) specifying a comprehensive foundational UML models that will cover election data in general.  The model defines the various objects (e.g., candidates, contests, offices, etc.) and their associated attributes, and specifies the relationships between and among the objects.  It includes a glossary and other tools to ensure that the implementations of the model (e.g., XML or JSON formats) are consistent in style, definition, and composition.
 
-There are currently 4 CDF projects under active development in this repository:
+There are currently 2 sets of next VVSG requirements related to interoperability and the CDFs:
+
+1. Principles & Guidelines 1.1 - High Quality Design
+2. Principles & Guidelines 4 - Interoperability
+
+There are currently 6 CDF projects under active development, located in the following repositories:
 
 1. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is located at https://github.com/usnistgov/CastVoteRecords.
 2. Election Event Logging - election-related events logged by election devices - the repository is located at https://github.com/usnistgov/ElectionEventLogging.
