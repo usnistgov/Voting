@@ -6,10 +6,10 @@ NIST's election CDF project has the goal of (a) specifying a common import/expor
 
 There are currently 4 sets of next VVSG requirements located in this repository that are related to interoperability and the CDFs:
 
-Principles & Guidelines 01.1 - High Quality Design
-Principles & Guidelines 02.7 - High Quality Implementation
-Principles & Guidelines 03 - Transparency
-Principles & Guidelines 04 - Interoperability
+1. Principles & Guidelines 01.1 - High Quality Design
+2. Principles & Guidelines 02.7 - High Quality Implementation
+3. Principles & Guidelines 03 - Transparency
+4. Principles & Guidelines 04 - Interoperability
 
 There is also an election glossary of terms, many of which are used in the next VVSG, located at https://github.com/HiltonRoscoe/GlossaryMD/blob/master/vvsg_living_glossary.md.
 
