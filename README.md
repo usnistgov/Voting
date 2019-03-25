@@ -4,10 +4,12 @@ This repository holds information associated with the NIST Voting Program.  It c
 
 NIST's election CDF project has the goal of (a) specifying a common import/export format for election devices such as electronic pollbooks, election management systems, and vote capture devices, and (b) specifying a comprehensive foundational UML models that will cover election data in general.  The model defines the various objects (e.g., candidates, contests, offices, etc.) and their associated attributes, and specifies the relationships between and among the objects.  It includes a glossary and other tools to ensure that the implementations of the model (e.g., XML or JSON formats) are consistent in style, definition, and composition.
 
-There are currently 2 sets of next VVSG requirements located in this repository that are related to interoperability and the CDFs:
+There are currently 4 sets of next VVSG requirements located in this repository that are related to interoperability and the CDFs:
 
-1. Principles & Guidelines 1.1 - High Quality Design
-2. Principles & Guidelines 4 - Interoperability
+Principles & Guidelines 01.1 - High Quality Design
+Principles & Guidelines 02.7 - High Quality Implementation
+Principles & Guidelines 03 - Transparency
+Principles & Guidelines 04 - Interoperability
 
 There is also an election glossary of terms, many of which are used in the next VVSG, located at https://github.com/HiltonRoscoe/GlossaryMD/blob/master/vvsg_living_glossary.md.
 
