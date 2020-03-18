@@ -11,7 +11,7 @@ There are currently 4 sets of next VVSG requirements located in this repository 
 3. Principles & Guidelines 03 - Transparency
 4. Principles & Guidelines 04 - Interoperability
 
-There is also an election glossary of terms, many of which are used in the next VVSG, located at https://github.com/HiltonRoscoe/GlossaryMD/blob/master/vvsg_living_glossary.md.
+There is also an election glossary of terms, many of which are used in the next VVSG, located at https://pages.nist.gov/ElectionGlossary/
 
 There are currently 6 CDF projects under active development, located in the following repositories:
 
@@ -24,5 +24,5 @@ Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more informa
 
 There are additionally two other CDF-related projects under active development:
 
-5. Election Business Process Modeling - for defining and modeling election processes for the purposes of informing use case development for CDF projects and showing where interoperability between processes may be beneficial and worthwhile to pursue - the repository is located at https://github.com/usnistgov/ElectionModeling. Contact [John Dziurlaj](mailto:jndvoting@gmail.com) for questions and more information.
+5. Election Business Process Modeling - for defining and modeling election processes for the purposes of informing use case development for CDF projects and showing where interoperability between processes may be beneficial and worthwhile to pursue - the repository is located at https://github.com/usnistgov/ElectionModeling. Contact [John Dziurlaj](mailto:john@hiltonroscoe.com) for questions and more information.
 6. Voting Methods - for defining a standard, specification and reference consisting of rigorously and precisely defined models of voting methods or modules including counting, tabulation, mathematical evaluation, and, common operations on vote data sets to support Data Interoperability - the repository is located at https://github.com/usnistgov/VotingMethods. Contact [Lauren Massa-Lochridge](mailto:lauren.massa.lochridge.sf@gmail.com) for questions and answers.
