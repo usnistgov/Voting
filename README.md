@@ -6,17 +6,18 @@ NIST's election CDF project has the goal of (a) specifying a common import/expor
 
 There is an election glossary of terms, many of which are used in VVSG 2.0, located at https://pages.nist.gov/ElectionGlossary/
 
-There are currently 7 CDF projects under active development, located in the following repositories:
+There are currently 8 CDF projects under active development, located in the following repositories:
 
 1. Ballot Definition - created by EMSs to support interoperable ballot styles that can be read by scanners - the repository is located at https://github.com/usnistgov/BallotDefinition.
 2. Cast Vote Records - created by scanners or DREs, contain tabulatable voter choices - the repository is located at https://github.com/usnistgov/CastVoteRecords.
 3. Election Event Logging - election-related events logged by election devices - the repository is located at https://github.com/usnistgov/ElectionEventLogging.
 4. Election Results Reporting - pre- and post-election information and results - the repository is located at https://github.com/usnistgov/ElectionResultsReporting.
-5. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges - the repository is located at https://github.com/usnistgov/VoterRecordsInterchange.
+5. microCDF - serialization for interoperability of machine readable data in space-constrained environments (e.g. paper) - the repository is located at https://github.com/usnistgov/mcdf
+6. Voter Records Interchange - voter registration-related information to support voter registration, electronic pollbooks, and voter registration database exchanges - the repository is located at https://github.com/usnistgov/VoterRecordsInterchange.
 
-Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more information.
+Please contact the [NIST Voting Team](mailto:voting@nist.gov) with questions and for more information
 
 There are additionally two other CDF-related projects under active development:
 
-6. Election Business Process Modeling - for defining and modeling election processes for the purposes of informing use case development for CDF projects and showing where interoperability between processes may be beneficial and worthwhile to pursue - the repository is located at https://github.com/usnistgov/ElectionModeling. Contact [John Dziurlaj](mailto:john@hiltonroscoe.com) for questions and more information.
-7. Voting Methods - for defining a standard, specification and reference consisting of rigorously and precisely defined models of voting methods or modules including counting, tabulation, mathematical evaluation, and, common operations on vote data sets to support Data Interoperability - the repository is located at https://github.com/usnistgov/VotingMethods. Contact [Lauren Massa-Lochridge](mailto:lauren.massa.lochridge.sf@gmail.com) for questions and answers.
+7. Election Business Process Modeling - for defining and modeling election processes for the purposes of informing use case development for CDF projects and showing where interoperability between processes may be beneficial and worthwhile to pursue - the repository is located at https://github.com/usnistgov/ElectionModeling. Contact [John Dziurlaj](mailto:john@turnout.rocks) for questions and more information.
+8. Voting Methods - for defining a standard, specification and reference consisting of rigorously and precisely defined models of voting methods or modules including counting, tabulation, mathematical evaluation, and, common operations on vote data sets to support Data Interoperability - the repository is located at https://github.com/usnistgov/VotingMethods. Contact [Lauren Massa-Lochridge](mailto:lauren.massa.lochridge.sf@gmail.com) for questions and answers.
